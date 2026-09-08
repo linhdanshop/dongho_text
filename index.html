@@ -53,6 +53,8 @@
             overflow: hidden;
             white-space: nowrap;
             text-align: center;
+            contain: layout paint;
+            transform: translateZ(0);
         }
 
         .ticker span {
@@ -63,18 +65,21 @@
             font-size: 58px;
             font-weight: 800;
             line-height: 1.45;
-            text-rendering: geometricPrecision;
+            text-rendering: auto;
             -webkit-font-smoothing: subpixel-antialiased;
-            animation: marquee 36s linear infinite;
+            backface-visibility: hidden;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            animation: marquee 48s linear infinite;
         }
 
         @keyframes marquee {
             from {
-                transform: translateX(0);
+                transform: translate3d(0, 0, 0);
             }
 
             to {
-                transform: translateX(-100%);
+                transform: translate3d(-100%, 0, 0);
             }
         }
     </style>
@@ -102,9 +107,8 @@ function updateClock() {
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const date = day + "/" + month;
 
-    document.getElementById("clock").innerHTML = time;
-    document.getElementById("date").innerHTML = date;
-    updateTickerWidth();
+    document.getElementById("clock").textContent = time;
+    document.getElementById("date").textContent = date;
 }
 
 function updateTickerWidth() {
@@ -124,6 +128,12 @@ function updateTickerWidth() {
 
 setInterval(updateClock, 1000);
 updateClock();
+updateTickerWidth();
+
+if (document.fonts) {
+    document.fonts.ready.then(updateTickerWidth);
+}
+
 window.addEventListener("resize", updateTickerWidth);
 </script>
 
