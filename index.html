@@ -29,6 +29,7 @@
             display: flex;
             align-items: baseline;
             gap: 20px;
+            font-variant-numeric: tabular-nums;
         }
 
         #clock {
@@ -47,7 +48,7 @@
         }
 
         .ticker {
-            width: 100vw;
+            width: var(--ticker-width, 620px);
             max-width: 100vw;
             overflow: hidden;
             white-space: nowrap;
@@ -56,12 +57,15 @@
 
         .ticker span {
             display: inline-block;
-            padding-left: 100%;
-            color: #ffd900;
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-            animation: marquee 22s linear infinite;
+            padding-left: var(--ticker-width, 620px);
+            color: #000000;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            font-size: 58px;
+            font-weight: 800;
+            line-height: 1.45;
+            text-rendering: geometricPrecision;
+            -webkit-font-smoothing: subpixel-antialiased;
+            animation: marquee 36s linear infinite;
         }
 
         @keyframes marquee {
@@ -100,10 +104,27 @@ function updateClock() {
 
     document.getElementById("clock").innerHTML = time;
     document.getElementById("date").innerHTML = date;
+    updateTickerWidth();
+}
+
+function updateTickerWidth() {
+    const container = document.querySelector(".container");
+    const ticker = document.querySelector(".ticker");
+
+    if (!container || !ticker) {
+        return;
+    }
+
+    const width = Math.ceil(container.getBoundingClientRect().width) + "px";
+
+    if (ticker.style.getPropertyValue("--ticker-width") !== width) {
+        ticker.style.setProperty("--ticker-width", width);
+    }
 }
 
 setInterval(updateClock, 1000);
 updateClock();
+window.addEventListener("resize", updateTickerWidth);
 </script>
 
 </body>
