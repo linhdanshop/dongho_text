@@ -62,7 +62,7 @@
             padding-left: var(--ticker-width, 620px);
             color: #000000;
             font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-            font-size: 58px;
+            font-size: 62px;
             font-weight: 800;
             line-height: 1.45;
             text-rendering: auto;
@@ -70,7 +70,7 @@
             backface-visibility: hidden;
             will-change: transform;
             transform: translate3d(0, 0, 0);
-            animation: marquee 48s linear infinite;
+            animation: marquee 42s linear infinite;
         }
 
         @keyframes marquee {
@@ -126,8 +126,15 @@ function updateTickerWidth() {
     }
 }
 
-setInterval(updateClock, 1000);
-updateClock();
+function scheduleClock() {
+    updateClock();
+
+    const now = new Date();
+    const delay = 1000 - now.getMilliseconds();
+    setTimeout(scheduleClock, delay);
+}
+
+scheduleClock();
 updateTickerWidth();
 
 if (document.fonts) {
