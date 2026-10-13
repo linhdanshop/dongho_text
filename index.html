@@ -6,11 +6,11 @@
     <title>Đồng Hồ Trực Tuyến</title>
     <style>
         :root {
-            --clock-size: clamp(104px, 5.2vw, 124px);
-            --date-size: clamp(78px, 3.9vw, 94px);
+            --clock-size: clamp(160px, 8vw, 190px);
+            --date-size: clamp(118px, 5.9vw, 140px);
             --ticker-size: clamp(52px, 2.45vw, 62px);
-            --row-gap: clamp(16px, 0.75vw, 20px);
-            --stack-gap: clamp(6px, 0.35vw, 10px);
+            --row-gap: clamp(20px, 1vw, 26px);
+            --stack-gap: 0px;
         }
 
         @media (orientation: landscape) {
@@ -53,20 +53,27 @@
 
         #clock {
             color: #ffffff;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
             font-size: var(--clock-size);
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 0;
             line-height: 1;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
         }
 
         #date {
             color: #ffffff;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
             font-size: var(--date-size);
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
         }
 
         .ticker {
+            display: none;
             width: var(--ticker-width, 760px);
             max-width: 100vw;
             overflow: hidden;
