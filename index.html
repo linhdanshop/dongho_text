@@ -34,7 +34,7 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: flex-start; /* đẩy lên trên */
         }
 
         .overlay {
@@ -53,23 +53,17 @@
 
         #clock {
             color: #ffffff;
-            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
             font-size: var(--clock-size);
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: 0;
-            line-height: 1;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1; /* bỏ khoảng dư phía trên */
         }
 
         #date {
             color: #ffffff;
-            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
             font-size: var(--date-size);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
         }
 
         .ticker {
